@@ -14,7 +14,7 @@ type Book struct{
 func (b Book) Display() {
 	fmt.Printf(
 		"Title:\t\t%q\n"+
-			"ID:\t%v\n", b.Title, b.ID)
+			"ID:\t%v\n\n", b.Title, b.ID)
 }
 
 // 3. Array of books (db)
