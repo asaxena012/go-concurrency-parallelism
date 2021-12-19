@@ -20,24 +20,26 @@ func main() {
 		id := rnd.Intn(10) + 1
 
 		// Look for book with id in cache
-		if b, ok := queryCache(id); ok {
-			fmt.Println("from cache:")
-			b.Display()
-			continue
-		}
+		go func(id int){
+			if b, ok := queryCache(id); ok {
+				fmt.Println("from cache:")
+				b.Display()
+			}
+		}(id)
 
 		// if not fetch from db	
-		if b, ok := queryDB(id); ok {
-			fmt.Println("from DB:")
-			b.Display()
-			continue
-		}
+		go func(id int){
+			if b, ok := queryDB(id); ok {
+				fmt.Println("from DB:")
+				b.Display()
+			}
+		}(id)
 
-		fmt.Println("Book not found!")
+		// fmt.Println("Book not found!")
 		time.Sleep(150 * time.Millisecond)
 	}
 	
-
+	time.Sleep(2 * time.Second)
 }
 
 // Fetch from cache func
