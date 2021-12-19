@@ -2,79 +2,62 @@ package main
 
 import "fmt"
 
-type Book struct {
-	ID            int
-	Title         string
-	Author        string
-	YearPublished int
+// 1. Book struct
+
+type Book struct{
+	ID int
+	Title string
 }
 
-func (b Book) String() string {
-	return fmt.Sprintf(
+// 2. Printing method for struct
+
+func (b Book) Display() {
+	fmt.Printf(
 		"Title:\t\t%q\n"+
-			"Author:\t\t%q\n"+
-			"Published:\t%v\n", b.Title, b.Author, b.YearPublished)
+			"ID:\t%v\n", b.Title, b.ID)
 }
+
+// 3. Array of books (db)
 
 var books = []Book{
 	Book{
-		ID:            1,
-		Title:         "The Hitchhiker's Guide to the Galaxy",
-		Author:        "Douglas Adams",
-		YearPublished: 1979,
+		ID: 1,
+		Title: "Harry Potter 1",
 	},
 	Book{
-		ID:            2,
-		Title:         "The Hobbit",
-		Author:        "J.R.R. Tolkien",
-		YearPublished: 1937,
+		ID: 2,
+		Title: "Harry Potter 2",
 	},
 	Book{
-		ID:            3,
-		Title:         "A Tale of Two Cities",
-		Author:        "Charles Dickens",
-		YearPublished: 1859,
+		ID: 3,
+		Title: "Harry Potter 3",
 	},
 	Book{
-		ID:            4,
-		Title:         "Les Misérables",
-		Author:        "Victor Hugo",
-		YearPublished: 1862,
+		ID: 4,
+		Title: "Harry Potter 4",
 	},
 	Book{
-		ID:            5,
-		Title:         "Harry Potter and the Philosopher's Stone",
-		Author:        "J.K. Rowling",
-		YearPublished: 1997,
+		ID: 5,
+		Title: "Harry Potter 5",
 	},
 	Book{
-		ID:            6,
-		Title:         "I, Robot",
-		Author:        "Isaac Asimov",
-		YearPublished: 1950,
+		ID: 6,
+		Title: "Harry Potter 6",
 	},
 	Book{
-		ID:            7,
-		Title:         "The Gods Themselves",
-		Author:        "Isaac Asimov",
-		YearPublished: 1973,
+		ID: 7,
+		Title: "Harry Potter 7",
 	},
 	Book{
-		ID:            8,
-		Title:         "The Moon is a Harsh Mistress",
-		Author:        "Robert A. Heinlein",
-		YearPublished: 1966,
+		ID: 8,
+		Title: "Harry Potter 8",
 	},
 	Book{
-		ID:            9,
-		Title:         "On Basilisk Station",
-		Author:        "David Weber",
-		YearPublished: 1993,
+		ID: 9,
+		Title: "Harry Potter 9",
 	},
 	Book{
-		ID:            10,
-		Title:         "The Android's Dream",
-		Author:        "John Scalzi",
-		YearPublished: 2006,
+		ID: 10,
+		Title: "Harry Potter 10",
 	},
 }
