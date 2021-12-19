@@ -1,4 +1,4 @@
-package main
+package books
 
 import "fmt"
 
@@ -19,7 +19,7 @@ func (b Book) Display() {
 
 // 3. Array of books (db)
 
-var books = []Book{
+var BookDB = []Book{
 	Book{
 		ID: 1,
 		Title: "Harry Potter 1",
