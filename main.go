@@ -4,6 +4,7 @@ import (
 	"concurrent/books"
 	"fmt"
 	"math/rand"
+	"sync"
 	"time"
 )
 
@@ -14,32 +15,35 @@ var cache = map[int]books.Book{}
 var rnd = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 func main() {
-
+	wg := &sync.WaitGroup{}
 	// Loop 1 to 10 random ids
 	for i:=0; i<10; i++ {
 		id := rnd.Intn(10) + 1
 
+		wg.Add(2)
 		// Look for book with id in cache
-		go func(id int){
+		go func(id int, wg *sync.WaitGroup){
 			if b, ok := queryCache(id); ok {
 				fmt.Println("from cache:")
 				b.Display()
 			}
-		}(id)
+			wg.Done()
+		}(id, wg)
 
 		// if not fetch from db	
-		go func(id int){
+		go func(id int, wg *sync.WaitGroup){
 			if b, ok := queryDB(id); ok {
 				fmt.Println("from DB:")
 				b.Display()
 			}
-		}(id)
+			wg.Done()
+		}(id, wg)
 
 		// fmt.Println("Book not found!")
-		time.Sleep(150 * time.Millisecond)
+		// time.Sleep(150 * time.Millisecond)
 	}
 	
-	time.Sleep(2 * time.Second)
+	wg.Wait()
 }
 
 // Fetch from cache func
@@ -57,7 +61,7 @@ func queryDB(id int) (books.Book, bool) {
 
 	for _, b := range books.BookDB {
 		if b.ID == id {
-			cache[id] = b
+			// cache[id] = b
 			return b, true
 		}
 	}
